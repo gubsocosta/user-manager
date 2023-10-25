@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Core\Modules\User\UseCases;
 
-use Core\Infra\Log\ILogger;
+use Core\Infra\Log\ILogHandler;
 use Core\Modules\User\Entities\AddressEntity;
 use Core\Modules\User\Entities\CoordinatesEntity;
 use Core\Modules\User\Entities\CreditCardEntity;
@@ -100,16 +100,16 @@ class GetUsersTest extends TestCase
                 $data['subscription']['term']
             )
         );
-        $mockedLogger = $this->createMock(ILogger::class);
-        $mockedLogger->expects($this->never())
+        $mockedLogHandler = $this->createMock(ILogHandler::class);
+        $mockedLogHandler->expects($this->never())
             ->method('error');
-        $mockedLogger->expects($this->once())
+        $mockedLogHandler->expects($this->once())
             ->method('info');
         $mockedGateway = $this->createMock(IGetUsersGateway::class);
         $mockedGateway->expects($this->once())
             ->method('getUsers')
             ->willReturn(collect([$mockedUser]));
-        $useCase = new GetUsersUseCase($mockedLogger, $mockedGateway);
+        $useCase = new GetUsersUseCase($mockedLogHandler, $mockedGateway);
         $result = $useCase->execute();
         $users = $result->users;
         $this->assertCount(1, $users);
@@ -121,16 +121,16 @@ class GetUsersTest extends TestCase
      */
     public function testShouldThrowAnExceptionWhenGatewayFails(): void
     {
-        $mockedLogger = $this->createMock(ILogger::class);
-        $mockedLogger->expects($this->once())
+        $mockedLogHandler = $this->createMock(ILogHandler::class);
+        $mockedLogHandler->expects($this->once())
             ->method('error');
-        $mockedLogger->expects($this->never())
+        $mockedLogHandler->expects($this->never())
             ->method('info');
         $mockedGateway = $this->createMock(IGetUsersGateway::class);
         $mockedGateway->expects($this->once())
             ->method('getUsers')
             ->willThrowException(new Exception('any error'));
-        $useCase = new GetUsersUseCase($mockedLogger, $mockedGateway);
+        $useCase = new GetUsersUseCase($mockedLogHandler, $mockedGateway);
         try {
             $useCase->execute();
         } catch (Exception $e) {
