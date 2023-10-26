@@ -2,14 +2,14 @@
 
 namespace Core\Modules\User\UseCases\GetUsers;
 
-use Core\Infra\Log\ILogger;
+use Core\Infra\Log\ILogHandler;
 use Core\Modules\User\UseCases\GetUsers\Gateways\IGetUsersGateway;
 use Exception;
 
 final class GetUsersUseCase
 {
     public function __construct(
-        private readonly ILogger $logger,
+        private readonly ILogHandler $logHandler,
         private readonly IGetUsersGateway $getUsersGateway
     )
     {
@@ -23,10 +23,10 @@ final class GetUsersUseCase
     {
         try {
             $users = $this->getUsersGateway->getUsers();
-            $this->logger->info('Get users successfully');
+            $this->logHandler->info('Get users successfully');
             return new GetUsersOutput($users);
         } catch (Exception $exception) {
-            $this->logger->error('Error when getting users: ' . $exception->getMessage());
+            $this->logHandler->error('Error when getting users: ' . $exception->getMessage());
             throw $exception;
         }
     }
