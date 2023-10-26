@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\App\Adapters\Modules\Users;
 
-use App\Adapters\Modules\Users\UsersAdapter;
+use App\Adapters\Modules\Users\UserAdapter;
 use Core\Infra\Http\IHttpClient;
 use Core\Infra\Http\IHttpResponse;
 use Core\Modules\User\Entities\UserEntity;
@@ -67,7 +67,7 @@ class UsersAdapterTest extends TestCase
         $mockedHttpClient->expects($this->once())
             ->method('get')
             ->willReturn($mockedHttpResponse);
-        $adapter = new UsersAdapter($mockedHttpClient);
+        $adapter = new UserAdapter($mockedHttpClient);
         $result = $adapter->getUsers();
         $this->assertCount(1, $result);
         $this->assertInstanceOf(UserEntity::class, $result->first());
@@ -88,7 +88,7 @@ class UsersAdapterTest extends TestCase
         $mockedHttpClient->expects($this->once())
             ->method('get')
             ->willReturn($mockedHttpResponse);
-        $adapter = new UsersAdapter($mockedHttpClient);
+        $adapter = new UserAdapter($mockedHttpClient);
         $this->expectException(UnexpectedValueException::class);
         $adapter->getUsers();
     }

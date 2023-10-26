@@ -13,7 +13,7 @@ use Core\Modules\User\UseCases\GetUsers\Gateways\IGetUsersGateway;
 use Illuminate\Support\Collection;
 use UnexpectedValueException;
 
-class UsersAdapter implements IGetUsersGateway
+class UserAdapter implements IGetUsersGateway
 {
     public function __construct(
         private readonly IHttpClient $httpClient
