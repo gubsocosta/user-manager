@@ -5,7 +5,7 @@ namespace App\Adapters\Infra\Log;
 use Core\Infra\Log\ILogHandler;
 use Illuminate\Support\Facades\Log;
 
-class MonologLogHandler implements ILogHandler
+final class LaravelLogHandler implements ILogHandler
 {
     public function error(string $message): void
     {
