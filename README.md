@@ -1,15 +1,18 @@
 # User Manager
 
 ## Descrição
+
 Esta aplicação tem como o objetivo expor dados de usuários, vindos de uma API
 
 ## Dependências
-- docker 25.0.5
-- php 8.2
-- composer 2.6.2
-- laravel 10.x
+
+-   docker 25.0.5
+-   php 8.2
+-   composer 2.6.2
+-   laravel 10.x
 
 ## Iniciando a aplicação
+
 Crie o arquivo `.env`
 
 ```shell
@@ -38,6 +41,13 @@ Gere o `app_key` com o comando:
 ```shell
 ./vendor/bin/sail artisan key:generate
 ```
+
+Instale as dependências JS:
+
+```shell
+./vendor/bin/sail npm i
+```
+
 Crie o link simbólico para tornar o diretorio de imagens acessível:
 
 ```shell
@@ -45,6 +55,7 @@ Crie o link simbólico para tornar o diretorio de imagens acessível:
 ```
 
 Execute as migrations e seeds:
+
 ```shell
 ./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan db:seed
@@ -53,15 +64,10 @@ Execute as migrations e seeds:
 Execute a aplicação:
 
 ```shell
-$ ./vendor/bin/sail artisan serve
+$ ./vendor/bin/sail npm run dev
 ```
+
 A aplicação estará sendo executada na porta 8000.
-
-Caso queira parar a aplicação, execute o comando abaixo:
-
-```shell
-./vendor/bin/sail artisan stop
-```
 
 Para ver a executar dos testes de unidade, execute o comando abaixo:
 
@@ -70,6 +76,7 @@ Para ver a executar dos testes de unidade, execute o comando abaixo:
 ```
 
 Para remover os containers:
+
 ```shell
 ./vendor/bin/sail down --remove-orphans
 ```
