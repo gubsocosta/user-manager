@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "resources/js/*"
+      ]
+    },
+    "noImplicitAny": false,
+    "types": [
+      "vite/client"
+    ],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": [
+    "resources/**/*.ts",
+    "resources/**/*.d.ts",
+    "resources/**/*.vue"
+  ]
+}
